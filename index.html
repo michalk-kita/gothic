@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBSCURA | Avant-Garde Jewelry</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@200;300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'obsidian': '#0a0a0a',
+                        'fog': '#888888',
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'serif'],
+                        display: ['"Cinzel"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+        
+        html { scroll-behavior: smooth; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; }
+
+        /* Ukrywanie scrollbara w karuzeli */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Animacje Tekstu */
+        .reveal-text {
+            animation: reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+
+        @keyframes reveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animacje Zdjęć (Fade In) */
+        .img-reveal {
+            opacity: 0;
+            transform: scale(0.98);
+            transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .img-reveal.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Efekt najechania na produkty */
+        .image-hover-zoom {
+            overflow: hidden;
+            background-color: #111;
+        }
+        .image-hover-zoom img {
+            transition: transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s;
+            filter: grayscale(100%) contrast(110%);
+        }
+        .image-hover-zoom:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%) contrast(100%);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black">
+
+    <div class="fixed inset-0 bg-noise pointer-events-none z-50 mix-blend-overlay opacity-30"></div>
+
+    <nav class="fixed top-0 left-0 w-full z-40 px-6 py-6 flex justify-between items-center mix-blend-difference text-white transition-all duration-300">
+        <a href="#" class="font-heading text-2xl tracking-tighter italic font-semibold z-50">Obscura.</a>
+        
+        <div class="hidden md:flex gap-12 font-body text-xs uppercase tracking-[0.2em] font-light">
+            <a href="#philosophy" class="hover:text-gray-400 transition-colors">Manifest</a>
+            <a href="#collection" class="hover:text-gray-400 transition-colors">Artefakty</a>
+            <a href="#atelier" class="hover:text-gray-400 transition-colors">Proces</a>
+        </div>
+
+        <button class="font-body text-xs uppercase tracking-widest border border-white/30 px-6 py-2 hover:bg-white hover:text-black transition-all">
+            Koszyk (0)
+        </button>
+    </nav>
+
+    <header class="relative h-screen flex items-center justify-center overflow-hidden bg-black">
+        <div class="absolute inset-0 z-0">
+            <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-60">
+                <source src="https://videos.pexels.com/video-files/5091624/5091624-hd_1920_1080_24fps.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#050505]"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4">
+            <div class="overflow-hidden mb-4">
+                <p class="font-body text-xs md:text-sm uppercase tracking-[0.4em] text-gray-300 reveal-text">
+                    Beyond Gender. Beyond Time.
+                </p>
+            </div>
+            <h1 class="font-heading text-6xl md:text-8xl lg:text-9xl italic text-white leading-none mb-6 reveal-text delay-1 drop-shadow-2xl">
+                Surowa <br> Materia
+            </h1>
+            <div class="mt-8 reveal-text delay-2 flex flex-col items-center gap-2">
+                <a href="#collection" class="group inline-flex items-center gap-4 text-sm font-body uppercase tracking-widest text-white hover:text-gray-300 transition-colors">
+                </a>
+            </div>
+        </div>
+
+        <a href="#philosophy" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.8" stroke="currentColor" class="w-10 h-10 text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+        </a>
+    </header>
+
+    <section id="philosophy" class="py-24 md:py-32 px-6 md:px-12 bg-[#050505]">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-start border-t border-white/10 pt-12">
+            <div class="md:col-span-4">
+                <span class="font-body text-xs text-gray-500 uppercase tracking-widest block mb-4">(01) — Filozofia</span>
+                <h2 class="font-heading text-4xl md:text-5xl text-white leading-tight">
+                    Biżuteria jako <br> <span class="text-gray-500 italic">zbroja</span>.
+                </h2>
+            </div>
+            <div class="md:col-span-1"></div>
+            <div class="md:col-span-7 font-body font-light text-gray-400 text-lg md:text-xl leading-relaxed space-y-8">
+                <p>
+                    W świecie pełnym etykiet, Obscura wybiera milczenie. Nasze formy nie mają płci. 
+                    Są surowe, ciężkie, wykute w srebrze i ogniu. Nie pytamy, kim jesteś. 
+                    Pytamy, co chcesz wyrazić.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="collection" class="py-20 px-4 bg-[#080808]">
+        <div class="max-w-[1600px] mx-auto">
+            <div class="flex justify-between items-end mb-16 px-4">
+                <h2 class="font-heading text-4xl italic text-white">Wybrane Formy</h2>
+                <span class="font-body text-xs text-gray-500 uppercase tracking-widest hidden md:block">Scrolluj w dół ↓</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                
+                <div class="group cursor-pointer lg:col-span-1 lg:row-span-2">
+                    <div class="image-hover-zoom aspect-[3/4] md:aspect-[2/3] relative w-full h-full bg-[#111]">
+                        <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=1500&auto=format&fit=crop" 
+                             alt="Silver Rings Hand" class="w-full h-full object-cover img-reveal" loading="lazy">
+                        <div class="absolute bottom-6 left-6 z-10 pointer-events-none">
+                            <h3 class="font-heading text-3xl text-white italic">Void Rings</h3>
+                            <p class="font-body text-xs text-gray-300 mt-1 uppercase tracking-widest">Srebro 925 / Set</p>
+                            <p class="font-body text-sm text-white mt-2">450 PLN</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer">
+                    <div class="image-hover-zoom aspect-square relative w-full h-full bg-[#111]">
+                        <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=1000&auto=format&fit=crop" 
+                             alt="Silver Chain" class="w-full h-full object-cover img-reveal" loading="lazy">
+                        <div class="absolute bottom-6 left-6 z-10 pointer-events-none">
+                            <h3 class="font-heading text-2xl text-white italic">Ouroboros Chain</h3>
+                            <p class="font-body text-sm text-gray-400 mt-1">590 PLN</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer">
+                    <div class="image-hover-zoom aspect-square relative w-full h-full bg-[#0a0a0a] flex items-center justify-center p-8 text-center border border-white/5 hover:border-white/20 transition-colors img-reveal">
+                        <div>
+                            <h3 class="font-heading text-3xl text-gray-200 mb-4">"Chaos"</h3>
+                            <p class="font-body text-sm text-gray-500 leading-relaxed max-w-xs mx-auto">
+                                Nieregularne formy inspirowane skałą wulkaniczną. Każde pęknięcie jest celowe.
+                            </p>
+                            <span class="block mt-6 text-xs uppercase tracking-widest border-b border-gray-600 inline-block pb-1 group-hover:text-white group-hover:border-white transition-all">Czytaj więcej</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer lg:col-span-2">
+                    <div class="image-hover-zoom aspect-[16/9] md:aspect-[21/9] relative w-full h-full bg-[#111]">
+                        <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?q=80&w=2000&auto=format&fit=crop" 
+                             alt="Silver Cuff" class="w-full h-full object-cover img-reveal" loading="lazy">
+                         <div class="absolute bottom-6 left-6 z-10 pointer-events-none">
+                            <h3 class="font-heading text-3xl text-white italic">Iron Heart Cuff</h3>
+                            <p class="font-body text-xs text-gray-300 mt-1 uppercase tracking-widest">Stal Nierdzewna / Surowa</p>
+                            <p class="font-body text-sm text-white mt-2">220 PLN</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#0a0a0a] border-t border-white/5 overflow-hidden">
+        <div class="max-w-[1600px] mx-auto px-6 mb-12 flex justify-between items-end">
+            <h2 class="font-heading text-3xl italic text-white">Edycja Limitowana</h2>
+            <div class="flex gap-4">
+                <button class="text-white hover:text-gray-500 transition-colors">←</button>
+                <button class="text-white hover:text-gray-500 transition-colors">→</button>
+            </div>
+        </div>
+
+        <div class="flex overflow-x-auto gap-8 px-6 pb-8 no-scrollbar snap-x snap-mandatory">
+            
+            <div class="flex-none w-[280px] md:w-[320px] snap-center group">
+                <div class="image-hover-zoom aspect-[4/5] w-full mb-4 relative bg-[#111]">
+                    <img src="https://images.unsplash.com/photo-1626021272714-27e13292415d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover img-reveal" loading="lazy" alt="Ring">
+                </div>
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-heading text-xl text-gray-200">Noctis Ring</h3>
+                    <span class="font-body text-sm text-gray-400">290 PLN</span>
+                </div>
+                <button class="w-full border border-gray-700 text-gray-300 py-3 uppercase text-xs tracking-widest font-body hover:bg-white hover:text-black hover:border-white transition-all duration-300">
+                    Do Koszyka
+                </button>
+            </div>
+
+            <div class="flex-none w-[280px] md:w-[320px] snap-center group">
+                <div class="image-hover-zoom aspect-[4/5] w-full mb-4 relative bg-[#111]">
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover img-reveal" loading="lazy" alt="Earring">
+                </div>
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-heading text-xl text-gray-200">Spike Earring</h3>
+                    <span class="font-body text-sm text-gray-400">180 PLN</span>
+                </div>
+                <button class="w-full border border-gray-700 text-gray-300 py-3 uppercase text-xs tracking-widest font-body hover:bg-white hover:text-black hover:border-white transition-all duration-300">
+                    Do Koszyka
+                </button>
+            </div>
+
+            <div class="flex-none w-[280px] md:w-[320px] snap-center group">
+                <div class="image-hover-zoom aspect-[4/5] w-full mb-4 relative bg-[#111]">
+                    <img src="https://images.unsplash.com/photo-1599643478518-17488fbbcd75?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover img-reveal" loading="lazy" alt="Choker">
+                </div>
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-heading text-xl text-gray-200">Velvet Choker</h3>
+                    <span class="font-body text-sm text-gray-400">250 PLN</span>
+                </div>
+                <button class="w-full border border-gray-700 text-gray-300 py-3 uppercase text-xs tracking-widest font-body hover:bg-white hover:text-black hover:border-white transition-all duration-300">
+                    Do Koszyka
+                </button>
+            </div>
+
+            <div class="flex-none w-[280px] md:w-[320px] snap-center group">
+                <div class="image-hover-zoom aspect-[4/5] w-full mb-4 relative bg-[#111]">
+                    <img src="https://images.unsplash.com/photo-1605218427306-633ba88c9eb3?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover img-reveal" loading="lazy" alt="Signet">
+                </div>
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-heading text-xl text-gray-200">Abyss Signet</h3>
+                    <span class="font-body text-sm text-gray-400">420 PLN</span>
+                </div>
+                <button class="w-full border border-gray-700 text-gray-300 py-3 uppercase text-xs tracking-widest font-body hover:bg-white hover:text-black hover:border-white transition-all duration-300">
+                    Do Koszyka
+                </button>
+            </div>
+
+            <div class="flex-none w-[280px] md:w-[320px] snap-center group">
+                <div class="image-hover-zoom aspect-[4/5] w-full mb-4 relative bg-[#111]">
+                    <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover img-reveal" loading="lazy" alt="Pendant">
+                </div>
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-heading text-xl text-gray-200">Lunar Pendant</h3>
+                    <span class="font-body text-sm text-gray-400">310 PLN</span>
+                </div>
+                <button class="w-full border border-gray-700 text-gray-300 py-3 uppercase text-xs tracking-widest font-body hover:bg-white hover:text-black hover:border-white transition-all duration-300">
+                    Do Koszyka
+                </button>
+            </div>
+
+             <div class="flex-none w-[280px] md:w-[320px] snap-center group">
+                <div class="image-hover-zoom aspect-[4/5] w-full mb-4 relative bg-[#111]">
+                    <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover img-reveal" loading="lazy" alt="Cuff">
+                </div>
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-heading text-xl text-gray-200">Raw Silver Cuff</h3>
+                    <span class="font-body text-sm text-gray-400">550 PLN</span>
+                </div>
+                <button class="w-full border border-gray-700 text-gray-300 py-3 uppercase text-xs tracking-widest font-body hover:bg-white hover:text-black hover:border-white transition-all duration-300">
+                    Do Koszyka
+                </button>
+            </div>
+
+            <div class="flex-none w-12"></div>
+        </div>
+    </section>
+
+    <section id="atelier" class="relative py-32 bg-black text-white overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-[#0a0a0a] z-0 hidden lg:block"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <div class="order-2 lg:order-1">
+                    <span class="font-body text-xs text-gray-500 uppercase tracking-widest block mb-6">(02) — Atelier</span>
+                    <h2 class="font-heading text-5xl md:text-6xl mb-8">
+                        Proces <span class="italic text-gray-500">&</span><br>Alchemia
+                    </h2>
+                    <p class="font-body text-gray-400 leading-loose mb-8 max-w-md">
+                        Każdy element powstaje w naszej krakowskiej pracowni. Topimy srebro, walcujemy blachę, rzeźbimy w wosku. 
+                        To nie jest masowa produkcja.
+                    </p>
+                    <ul class="space-y-4 font-body text-sm text-gray-300 mb-10 border-l border-gray-800 pl-6">
+                        <li class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full"></span> Czyste Srebro Próby 925
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 bg-gray-500 rounded-full"></span> Oksydowane Wykończenie
+                        </li>
+                    </ul>
+                    <button class="bg-white text-black px-8 py-4 font-body text-xs uppercase tracking-[0.2em] hover:bg-gray-200 transition-colors">
+                        Zobacz Pracownię
+                    </button>
+                </div>
+
+                <div class="order-1 lg:order-2 relative">
+                    <div class="relative z-10 border border-white/10 p-2 bg-[#111]">
+                        <img src="https://images.unsplash.com/photo-1589128777073-263566ce5d98?q=80&w=1500&auto=format&fit=crop" 
+                             alt="Craftsmanship Tools" class="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700 img-reveal" loading="lazy">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="newsletter" class="bg-black py-16 px-6 border-t border-white/10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+            <div class="space-y-6">
+                <a href="#" class="font-heading text-4xl text-white italic">Obscura.</a>
+                <p class="font-body text-sm text-gray-500 max-w-xs">
+                    Surowa biżuteria unisex.<br>
+                    Projektowana i wykonywana ręcznie.
+                </p>
+            </div>
+            <div class="w-full md:w-auto">
+                <p class="font-body text-xs uppercase tracking-widest text-gray-400 mb-4">Newsletter</p>
+                <div class="flex border-b border-gray-700 pb-2">
+                    <input type="email" placeholder="Twój e-mail" class="bg-transparent w-full md:w-64 outline-none text-white font-body placeholder-gray-800">
+                    <button class="text-white hover:text-gray-400 transition-colors px-4 uppercase text-xs tracking-widest">
+                        Zapisz
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-16 pt-8 border-t border-white/5">
+            <p class="font-body text-[10px] text-gray-700 uppercase tracking-widest">© 2024 Obscura Jewelry. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const images = document.querySelectorAll('.img-reveal');
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            images.forEach(img => { imageObserver.observe(img); });
+        });
+    </script>
+
+</body>
+</html>
