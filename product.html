@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Void Rings | OBSCURA</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@200;300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'obsidian': '#0a0a0a',
+                        'fog': '#888888',
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'serif'],
+                        display: ['"Cinzel"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                        gothic: ['"UnifrakturMaguntia"', 'cursive'],
+                    },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+        
+        html { scroll-behavior: smooth; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; }
+
+        .reveal-text {
+            animation: reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        
+        @keyframes reveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Input number hide arrows */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black">
+
+    <div class="fixed inset-0 bg-noise pointer-events-none z-50 mix-blend-overlay opacity-30"></div>
+
+    <!-- Nawigacja -->
+    <nav class="fixed top-0 left-0 w-full z-40 px-6 py-6 flex justify-between items-center mix-blend-difference text-white transition-all duration-300">
+        <a href="index.html" class="font-gothic text-3xl tracking-normal z-50">Obscura.</a>
+        
+        <div class="hidden md:flex gap-12 font-gothic text-xl tracking-[0.1em] font-normal">
+            <a href="index.html#philosophy" class="hover:text-gray-400 transition-colors">Manifest</a>
+            <a href="index.html#collection" class="hover:text-gray-400 transition-colors">Artefakty</a>
+            <a href="index.html#atelier" class="hover:text-gray-400 transition-colors">Proces</a>
+        </div>
+
+        <button class="font-gothic text-lg tracking-widest border border-white/30 px-6 py-2 hover:bg-white hover:text-black transition-all">
+            Koszyk (0)
+        </button>
+    </nav>
+
+    <!-- Product Section -->
+    <main class="pt-32 pb-24 px-6 md:px-12 bg-[#050505] min-h-screen">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Breadcrumbs -->
+            <div class="font-body text-xs text-gray-500 uppercase tracking-widest mb-12 flex gap-2">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <span>/</span>
+                <a href="index.html#collection" class="hover:text-white transition-colors">Kolekcja</a>
+                <span>/</span>
+                <span class="text-white">Void Rings</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+                
+                <!-- Lewa kolumna: Zdjęcia -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="w-full aspect-[3/4] bg-[#111] overflow-hidden relative group">
+                        <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=1500&auto=format&fit=crop" 
+                             alt="Void Rings" 
+                             class="w-full h-full object-cover reveal-text transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <!-- Thumbnails (przykładowe) -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="aspect-square bg-[#111] overflow-hidden cursor-pointer">
+                             <img src="https://images.unsplash.com/photo-1626021272714-27e13292415d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="aspect-square bg-[#111] overflow-hidden cursor-pointer">
+                             <img src="https://images.unsplash.com/photo-1605218427306-633ba88c9eb3?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prawa kolumna: Detale -->
+                <div class="lg:col-span-5 flex flex-col pt-4 sticky top-32 h-fit">
+                    
+                    <h1 class="font-heading text-5xl md:text-6xl text-white italic mb-2 reveal-text" style="animation-delay: 0.1s;">Void Rings</h1>
+                    <p class="font-body text-sm text-gray-400 uppercase tracking-widest mb-6 reveal-text" style="animation-delay: 0.2s;">Srebro 925 / Oksydowane</p>
+                    
+                    <div class="font-body text-2xl text-white mb-8 reveal-text" style="animation-delay: 0.3s;">450 PLN</div>
+
+                    <div class="space-y-6 mb-10 border-t border-white/10 pt-8 reveal-text" style="animation-delay: 0.4s;">
+                        <p class="font-body text-gray-400 font-light leading-relaxed">
+                            Zestaw trzech pierścieni o nieregularnej fakturze. 
+                            Inspirowane pustką i chaosem. Każdy egzemplarz jest ręcznie wykańczany, 
+                            dzięki czemu posiada unikalne ślady "zniszczenia". 
+                            Można nosić razem lub osobno.
+                        </p>
+                        <p class="font-body text-gray-400 font-light leading-relaxed">
+                            Powierzchnia jest głęboko oksydowana, a następnie polerowana na krawędziach, 
+                            by wydobyć kontrast między światłem a mrokiem.
+                        </p>
+                    </div>
+
+                    <!-- Selektory -->
+                    <div class="space-y-6 mb-12 reveal-text" style="animation-delay: 0.5s;">
+                        <div>
+                            <label class="font-body text-xs uppercase tracking-widest text-gray-500 block mb-3">Rozmiar</label>
+                            <div class="grid grid-cols-4 gap-2">
+                                <button class="border border-white/20 py-3 text-sm hover:border-white transition-colors focus:bg-white focus:text-black">10</button>
+                                <button class="border border-white/20 py-3 text-sm hover:border-white transition-colors focus:bg-white focus:text-black">12</button>
+                                <button class="border border-white/20 py-3 text-sm hover:border-white transition-colors focus:bg-white focus:text-black">14</button>
+                                <button class="border border-white/20 py-3 text-sm hover:border-white transition-colors focus:bg-white focus:text-black">16</button>
+                            </div>
+                        </div>
+
+                        <div>
+                             <label class="font-body text-xs uppercase tracking-widest text-gray-500 block mb-3">Ilość</label>
+                             <div class="flex border border-white/20 w-32">
+                                 <button class="px-4 py-2 hover:bg-white/10 text-xl">-</button>
+                                 <input type="number" value="1" class="bg-transparent w-full text-center outline-none font-body text-white">
+                                 <button class="px-4 py-2 hover:bg-white/10 text-xl">+</button>
+                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <button class="w-full bg-white text-black py-4 font-body text-xs uppercase tracking-[0.2em] hover:bg-gray-300 transition-colors reveal-text" style="animation-delay: 0.6s;">
+                        Dodaj do Koszyka
+                    </button>
+                    
+                    <p class="mt-4 text-center font-body text-[10px] text-gray-500 uppercase tracking-widest">
+                        Wysyłka w 24h • 30 dni na zwrot
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Kopia z index.html) -->
+    <footer id="newsletter" class="bg-black py-16 px-6 border-t border-white/10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+            <div class="space-y-6">
+                <a href="#" class="font-heading text-4xl text-white italic">Obscura.</a>
+                <p class="font-body text-sm text-gray-500 max-w-xs">
+                    Surowa biżuteria unisex.<br>
+                    Projektowana i wykonywana ręcznie.
+                </p>
+            </div>
+            <div class="w-full md:w-auto">
+                <p class="font-body text-xs uppercase tracking-widest text-gray-400 mb-4">Newsletter</p>
+                <div class="flex border-b border-gray-700 pb-2">
+                    <input type="email" placeholder="Twój e-mail" class="bg-transparent w-full md:w-64 outline-none text-white font-body placeholder-gray-800">
+                    <button class="text-white hover:text-gray-400 transition-colors px-4 uppercase text-xs tracking-widest">
+                        Zapisz
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-16 pt-8 border-t border-white/5">
+            <p class="font-body text-[10px] text-gray-700 uppercase tracking-widest">© 2024 Obscura Jewelry. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
