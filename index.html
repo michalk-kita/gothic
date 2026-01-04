@@ -9,7 +9,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@200;300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@200;300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -23,6 +23,7 @@
                         heading: ['"Playfair Display"', 'serif'],
                         display: ['"Cinzel"', 'serif'],
                         body: ['"Inter"', 'sans-serif'],
+                        gothic: ['"UnifrakturMaguntia"', 'cursive'],
                     },
                     backgroundImage: {
                         'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
@@ -60,6 +61,25 @@
         @keyframes reveal {
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* NOWA ANIMACJA HERO */
+        @keyframes hero-pulse {
+            0% {
+                transform: scale(1.1);
+                filter: grayscale(100%) contrast(120%) brightness(0.8);
+            }
+            50% {
+                filter: grayscale(60%) contrast(110%) brightness(1);
+            }
+            100% {
+                transform: scale(1.0);
+                filter: grayscale(100%) contrast(120%) brightness(0.8);
+            }
+        }
+
+        .hero-animation {
+            animation: hero-pulse 15s ease-in-out infinite alternate;
+        }
 
         /* Animacje Zdjęć (Fade In) */
         .img-reveal {
@@ -92,54 +112,57 @@
     <div class="fixed inset-0 bg-noise pointer-events-none z-50 mix-blend-overlay opacity-30"></div>
 
     <nav class="fixed top-0 left-0 w-full z-40 px-6 py-6 flex justify-between items-center mix-blend-difference text-white transition-all duration-300">
-        <a href="#" class="font-heading text-2xl tracking-tighter italic font-semibold z-50">Obscura.</a>
+        <a href="#" class="font-gothic text-3xl tracking-normal z-50">Obscura.</a>
         
-        <div class="hidden md:flex gap-12 font-body text-xs uppercase tracking-[0.2em] font-light">
+        <div class="hidden md:flex gap-12 font-gothic text-xl tracking-[0.1em] font-normal">
             <a href="#philosophy" class="hover:text-gray-400 transition-colors">Manifest</a>
             <a href="#collection" class="hover:text-gray-400 transition-colors">Artefakty</a>
             <a href="#atelier" class="hover:text-gray-400 transition-colors">Proces</a>
         </div>
 
-        <button class="font-body text-xs uppercase tracking-widest border border-white/30 px-6 py-2 hover:bg-white hover:text-black transition-all">
+        <button class="font-gothic text-lg tracking-widest border border-white/30 px-6 py-2 hover:bg-white hover:text-black transition-all">
             Koszyk (0)
         </button>
     </nav>
 
-    <header class="relative h-screen flex items-center justify-center overflow-hidden bg-black">
+    <header class="relative min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-[#050505]">
         
-        <video 
-            autoplay 
-            muted 
-            loop 
-            playsinline 
-            class="absolute inset-0 w-full h-full object-cover grayscale opacity-70 z-0"
-        >
-            <source src="hero-video.mp4" type="video/webm">
-            Your browser does not support the video tag.
-        </video>
-        
-        <div class="absolute inset-0 z-10 bg-black/30"></div>
-        
-        <div class="absolute inset-0 z-10 bg-gradient-to-b from-black/80 via-transparent to-[#050505]"></div>
-
-        <div class="relative z-20 text-center px-4">
-            <div class="overflow-hidden mb-4">
-                <p class="font-body text-xs md:text-sm uppercase tracking-[0.4em] text-gray-300 reveal-text">
-                    Beyond Gender. Beyond Time.
+        <div class="order-2 lg:order-1 relative z-20 flex flex-col justify-center px-6 md:px-20 py-20 lg:py-0 border-r border-white/5">
+            <div class="overflow-hidden mb-6">
+                <p class="font-body text-xs md:text-sm uppercase tracking-[0.4em] text-gray-400 reveal-text flex items-center gap-4">
+                    <span class="w-8 h-[1px] bg-gray-600"></span>
+                    Avant-Garde Collection
                 </p>
             </div>
-            <h1 class="font-heading text-6xl md:text-8xl lg:text-9xl italic text-white leading-none mb-6 reveal-text delay-1 drop-shadow-2xl">
-                Surowa <br> Materia
+            
+            <h1 class="font-heading text-6xl md:text-8xl lg:text-9xl text-white leading-[0.9] mb-8 reveal-text delay-1">
+                <span class="block italic text-gray-400">Eteryczne</span>
+                Światło.
             </h1>
-            <div class="mt-8 reveal-text delay-2 flex flex-col items-center gap-2">
-                <a href="#collection" class="group inline-flex items-center gap-4 text-sm font-body uppercase tracking-widest text-white hover:text-gray-300 transition-colors">
-                    <span class="border-b border-white group-hover:border-gray-400 pb-1 transition-all">Eksploruj</span>
+            
+            <div class="reveal-text delay-2 max-w-md">
+                <p class="font-body text-gray-400 font-light leading-relaxed mb-10 text-sm md:text-base">
+                    Biżuteria utkana z blasku. Delikatne srebro, płynne linie i formy inspirowane naturą. 
+                    Dla tych, którzy szukają subtelnego piękna.
+                </p>
+                
+                <a href="#collection" class="inline-block bg-white text-black px-10 py-4 font-body text-xs uppercase tracking-[0.2em] hover:bg-gray-300 transition-colors">
+                    Odkryj Blask
                 </a>
             </div>
         </div>
 
-        <a href="#philosophy" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 animate-bounce cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.8" stroke="currentColor" class="w-10 h-10 text-white">
+        <div class="order-1 lg:order-2 relative h-[60vh] lg:h-auto overflow-hidden group">
+            <div class="absolute inset-0 bg-noise opacity-20 z-10 mix-blend-overlay"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10 lg:bg-gradient-to-l lg:from-transparent lg:via-transparent lg:to-[#050505]/90"></div>
+            
+            <img src="https://images.unsplash.com/photo-1531123414780-f74242c2b052?q=80&w=2000&auto=format&fit=crop" 
+                 alt="Gothic Girl with Jewelry" 
+                 class="absolute inset-0 w-full h-full object-cover hero-animation">
+        </div>
+
+        <a href="#philosophy" class="absolute bottom-10 left-6 lg:left-20 z-30 animate-pulse cursor-pointer hidden lg:block">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.5" stroke="currentColor" class="w-12 h-12 text-white/50 hover:text-white transition-colors">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
         </a>
@@ -173,7 +196,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                 
-                <div class="group cursor-pointer lg:col-span-1 lg:row-span-2">
+                <a href="product.html" class="group cursor-pointer lg:col-span-1 lg:row-span-2 block">
                     <div class="image-hover-zoom aspect-[3/4] md:aspect-[2/3] relative w-full h-full bg-[#111]">
                         <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=1500&auto=format&fit=crop" 
                              alt="Silver Rings Hand" class="w-full h-full object-cover img-reveal" loading="lazy">
@@ -183,7 +206,7 @@
                             <p class="font-body text-sm text-white mt-2">450 PLN</p>
                         </div>
                     </div>
-                </div>
+                </a>
 
                 <div class="group cursor-pointer">
                     <div class="image-hover-zoom aspect-square relative w-full h-full bg-[#111]">
